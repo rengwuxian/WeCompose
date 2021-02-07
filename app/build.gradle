@@ -36,20 +36,25 @@ android {
   }
   composeOptions {
     kotlinCompilerExtensionVersion compose_version
-    kotlinCompilerVersion '1.4.21'
   }
 }
 
 dependencies {
 
-  implementation 'androidx.core:core-ktx:1.3.2'
+  implementation 'androidx.core:core-ktx:1.5.0-beta01'
+  implementation 'androidx.activity:activity-ktx:1.1.0'
   implementation 'androidx.appcompat:appcompat:1.2.0'
   implementation 'com.google.android.material:material:1.2.1'
-  implementation "androidx.compose.ui:ui:$compose_version"
+  implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
+  implementation "androidx.compose.foundation:foundation:$compose_version"
+  implementation "androidx.compose.foundation:foundation-layout:$compose_version"
   implementation "androidx.compose.material:material:$compose_version"
+  implementation "androidx.compose.ui:ui:$compose_version"
   implementation "androidx.compose.ui:ui-tooling:$compose_version"
-  implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.0-alpha06'
-  testImplementation 'junit:junit:4.+'
+  implementation "androidx.compose.ui:ui-util:$compose_version"
+  implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.0-rc01'
+  implementation "dev.chrisbanes.accompanist:accompanist-insets:0.5.0"
+  testImplementation 'junit:junit:4.13.1'
   androidTestImplementation 'androidx.test.ext:junit:1.1.2'
   androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 }
