@@ -7,15 +7,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Paint
-import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.platform.AmbientAnimationClock
 import androidx.compose.ui.platform.setContent
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.core.view.WindowCompat
-import com.rengwuxian.wecompose.ui.*
+import com.rengwuxian.wecompose.ui.Home
 import com.rengwuxian.wecompose.ui.theme.WeTheme
 import kotlin.math.roundToInt
 
@@ -57,11 +55,10 @@ fun Modifier.unread(read: Boolean, badgeColor: Color) = this
   .drawWithContent {
     drawContent()
     if (!read) {
-      drawIntoCanvas { canvas ->
-        val paint = Paint().apply {
-          color = badgeColor
-        }
-        canvas.drawCircle(Offset(size.width - 1.dp.toPx(), 1.dp.toPx()), 5.dp.toPx(), paint)
-      }
+      drawCircle(
+        color = badgeColor,
+        radius = 5.dp.toPx(),
+        center = Offset(size.width - 1.dp.toPx(), 1.dp.toPx()),
+      )
     }
   }
