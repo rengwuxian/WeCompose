@@ -1,6 +1,7 @@
 package com.rengwuxian.wecompose
 
 import android.os.Bundle
+import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.ui.Modifier
@@ -8,8 +9,7 @@ import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.layout
-import androidx.compose.ui.platform.AmbientAnimationClock
-import androidx.compose.ui.platform.setContent
+import androidx.compose.ui.platform.LocalAnimationClock
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.core.view.WindowCompat
@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
     val viewModel: WeViewModel by viewModels()
     setContent {
       WeTheme(theme = viewModel.theme) {
-        Home(AmbientAnimationClock)
+        Home(LocalAnimationClock)
       }
     }
   }

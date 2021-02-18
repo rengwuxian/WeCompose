@@ -70,7 +70,7 @@ private val NewYearColorPalette = WeColors(
   chatPageBgAlpha = 1f,
 )
 
-private val AmbientWeColors = ambientOf {
+private val LocalWeColors = compositionLocalOf {
   LightColorPalette
 }
 
@@ -78,7 +78,7 @@ private val AmbientWeColors = ambientOf {
 object WeTheme {
   val colors: WeColors
     @Composable
-    get() = AmbientWeColors.current
+    get() = LocalWeColors.current
 
   enum class Theme {
     Light, Dark, NewYear
@@ -145,7 +145,7 @@ class WeColors(
 }
 
 @Composable
-fun WeTheme(theme: WeTheme.Theme = WeTheme.Theme.Light, content: @Composable() () -> Unit) {
+fun WeTheme(theme: WeTheme.Theme = WeTheme.Theme.Light, content: @Composable () -> Unit) {
   val targetColors = when (theme) {
     WeTheme.Theme.Light -> LightColorPalette
     WeTheme.Theme.Dark -> DarkColorPalette
@@ -190,7 +190,7 @@ fun WeTheme(theme: WeTheme.Theme = WeTheme.Theme.Light, content: @Composable() (
     chatPageBgAlpha = chatPageBgAlpha.value,
   )
 
-  Providers(AmbientWeColors provides colors) {
+  Providers(LocalWeColors provides colors) {
     MaterialTheme(
       shapes = shapes
     ) {

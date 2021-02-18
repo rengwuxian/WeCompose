@@ -13,11 +13,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.viewinterop.viewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.rengwuxian.wecompose.R
 import com.rengwuxian.wecompose.WeViewModel
 import com.rengwuxian.wecompose.data.Chat
@@ -51,7 +51,7 @@ fun ChatListItem(
       })
   ) {
     Image(
-      vectorResource(chat.friend.avatar), "avatar", Modifier
+      painterResource(chat.friend.avatar), "avatar", Modifier
         .padding(12.dp, 8.dp, 8.dp, 8.dp)
         .size(48.dp)
         .unread(chat.msgs.last().read, WeTheme.colors.badge)

@@ -5,14 +5,11 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.rengwuxian.wecompose.data.Chat
 import com.rengwuxian.wecompose.data.Module
 import com.rengwuxian.wecompose.data.Msg
 import com.rengwuxian.wecompose.data.User
 import com.rengwuxian.wecompose.ui.theme.WeTheme
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 class WeViewModel : ViewModel() {
   var chats by mutableStateOf(

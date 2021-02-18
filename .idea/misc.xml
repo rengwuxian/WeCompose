@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="../../../../layout/compose-model-1613621128956.xml" value="0.13033359193173003" />
+        <entry key="../../../../layout/compose-model-1613621952272.xml" value="0.9245283018867925" />
+        <entry key="../../../../layout/compose-model-1613629622033.xml" value="0.1406446211804102" />
+        <entry key="../../../../layout/compose-model-1613629799660.xml" value="0.7818181818181819" />
+        <entry key="../../../../layout/compose-model-1613629799695.xml" value="0.1" />
+        <entry key="../../../../layout/compose-model-1613629806454.xml" value="0.1" />
+        <entry key="../../../../layout/compose-model-1613629873815.xml" value="0.1" />
+      </map>
+    </option>
+  </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />

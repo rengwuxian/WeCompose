@@ -8,19 +8,17 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.viewinterop.viewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.rengwuxian.wecompose.R
 import com.rengwuxian.wecompose.WeViewModel
 import com.rengwuxian.wecompose.ui.theme.WeTheme
-import dev.chrisbanes.accompanist.insets.AmbientWindowInsets
 import dev.chrisbanes.accompanist.insets.navigationBarsPadding
 import dev.chrisbanes.accompanist.insets.statusBarsPadding
 
 @Composable
 fun WeTopBar(title: String, onBack: (() -> Unit)? = null) {
-  val insets = AmbientWindowInsets.current
   Box(
     Modifier
       .background(WeTheme.colors.background)
@@ -33,7 +31,7 @@ fun WeTopBar(title: String, onBack: (() -> Unit)? = null) {
     ) {
       if (onBack != null) {
         Icon(
-          vectorResource(R.drawable.ic_back),
+          painterResource(R.drawable.ic_back),
           null,
           Modifier
             .clickable(onClick = onBack)
@@ -46,7 +44,7 @@ fun WeTopBar(title: String, onBack: (() -> Unit)? = null) {
       Spacer(Modifier.weight(1f))
       val viewModel: WeViewModel = viewModel()
       Icon(
-        vectorResource(R.drawable.ic_palette),
+        painterResource(R.drawable.ic_palette),
         "切换主题",
         Modifier
           .clickable(onClick = {

@@ -23,12 +23,12 @@ import androidx.compose.ui.geometry.RoundRect
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.TransformOrigin
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.util.packFloats
-import androidx.compose.ui.viewinterop.viewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.rengwuxian.wecompose.R
 import com.rengwuxian.wecompose.WeViewModel
 import com.rengwuxian.wecompose.data.Chat
@@ -80,19 +80,19 @@ fun ChatPage(
           .fillMaxSize()
       ) {
         Image(
-          vectorResource(R.drawable.ic_bg_newyear_left), null,
+          painterResource(R.drawable.ic_bg_newyear_left), null,
           Modifier
             .align(Alignment.CenterStart)
             .padding(bottom = 100.dp)
         )
         Image(
-          vectorResource(R.drawable.ic_bg_newyear_top), null,
+          painterResource(R.drawable.ic_bg_newyear_top), null,
           Modifier
             .align(Alignment.TopEnd)
             .padding(horizontal = 24.dp)
         )
         Image(
-          vectorResource(R.drawable.ic_bg_newyear_right), null,
+          painterResource(R.drawable.ic_bg_newyear_right), null,
           Modifier
             .align(Alignment.BottomEnd)
             .padding(vertical = 200.dp)
@@ -127,7 +127,7 @@ fun ChatBottomBar(onBombClicked: () -> Unit) {
   var editingText by remember { mutableStateOf("") }
   WeBottomBar {
     Icon(
-      vectorResource(R.drawable.ic_voice),
+      painterResource(R.drawable.ic_voice),
       contentDescription = null,
       Modifier
         .align(Alignment.CenterVertically)
@@ -155,7 +155,7 @@ fun ChatBottomBar(onBombClicked: () -> Unit) {
       fontSize = 24.sp
     )
     Icon(
-      vectorResource(R.drawable.ic_add),
+      painterResource(R.drawable.ic_add),
       contentDescription = null,
       Modifier
         .align(Alignment.CenterVertically)
@@ -187,7 +187,7 @@ fun MessageItem(msg: Msg, shakingTime: Int, shakingLevel: Int) {
       horizontalArrangement = Arrangement.End
     ) {
       val bubbleColor = WeTheme.colors.bubbleMe
-      Text("${msg.text}",
+      Text(msg.text,
         Modifier
           .graphicsLayer(
             rotationZ = shakingAngleBubble.value,
@@ -214,7 +214,7 @@ fun MessageItem(msg: Msg, shakingTime: Int, shakingLevel: Int) {
           .padding(20.dp, 10.dp),
         color = WeTheme.colors.textPrimaryMe)
       Image(
-        vectorResource(msg.from.avatar),
+        painterResource(msg.from.avatar),
         contentDescription = "Avatar Me",
         Modifier
           .graphicsLayer(
@@ -232,7 +232,7 @@ fun MessageItem(msg: Msg, shakingTime: Int, shakingLevel: Int) {
         .padding(8.dp)
     ) {
       Image(
-        vectorResource(msg.from.avatar),
+        painterResource(msg.from.avatar),
         contentDescription = "Avatar Me",
         Modifier
           .graphicsLayer(
@@ -243,7 +243,7 @@ fun MessageItem(msg: Msg, shakingTime: Int, shakingLevel: Int) {
           .clip(RoundedCornerShape(4.dp))
       )
       val bubbleColor = WeTheme.colors.bubbleOthers
-      Text("${msg.text}",
+      Text(msg.text,
         Modifier
           .graphicsLayer(
             rotationZ = -shakingAngleBubble.value,
