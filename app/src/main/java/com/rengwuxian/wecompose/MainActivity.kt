@@ -9,7 +9,6 @@ import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.layout
-import androidx.compose.ui.platform.LocalAnimationClock
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.core.view.WindowCompat
@@ -26,7 +25,7 @@ class MainActivity : AppCompatActivity() {
     val viewModel: WeViewModel by viewModels()
     setContent {
       WeTheme(theme = viewModel.theme) {
-        Home(LocalAnimationClock)
+        Home()
       }
     }
   }

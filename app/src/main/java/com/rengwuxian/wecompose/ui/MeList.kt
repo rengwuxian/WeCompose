@@ -29,7 +29,7 @@ fun MeListTopBar() {
     Modifier
       .background(WeTheme.colors.listItem)
       .fillMaxWidth()
-      .preferredHeight(224.dp)
+      .height(224.dp)
       .statusBarsPadding()
   ) {
     Image(
@@ -147,14 +147,14 @@ fun MeList() {
         Modifier
           .background(WeTheme.colors.background)
           .fillMaxWidth()
-          .preferredHeight(8.dp)
+          .height(8.dp)
       )
       MeListItem(R.drawable.ic_pay, "支付")
       Spacer(
         Modifier
           .background(WeTheme.colors.background)
           .fillMaxWidth()
-          .preferredHeight(8.dp)
+          .height(8.dp)
       )
       MeListItem(R.drawable.ic_collections, "收藏")
       Divider(startIndent = 56.dp, color = WeTheme.colors.chatListDivider, thickness = 0.8f.dp)
@@ -167,7 +167,7 @@ fun MeList() {
         Modifier
           .background(WeTheme.colors.background)
           .fillMaxWidth()
-          .preferredHeight(8.dp)
+          .height(8.dp)
       )
       MeListItem(R.drawable.ic_settings, "设置")
     }

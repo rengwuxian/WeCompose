@@ -21,13 +21,13 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.RoundRect
 import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.TransformOrigin
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.util.packFloats
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.rengwuxian.wecompose.R
 import com.rengwuxian.wecompose.WeViewModel
@@ -140,11 +140,11 @@ fun ChatBottomBar(onBombClicked: () -> Unit) {
       Modifier
         .weight(1f)
         .padding(4.dp, 8.dp)
-        .preferredHeight(40.dp)
+        .height(40.dp)
         .clip(MaterialTheme.shapes.small)
         .background(WeTheme.colors.textFieldBackground)
         .padding(start = 8.dp, top = 10.dp, end = 8.dp),
-      cursorColor = WeTheme.colors.textPrimary
+      cursorBrush = SolidColor(WeTheme.colors.textPrimary)
     )
     Text(
       "\uD83D\uDCA3",
@@ -191,7 +191,7 @@ fun MessageItem(msg: Msg, shakingTime: Int, shakingLevel: Int) {
         Modifier
           .graphicsLayer(
             rotationZ = shakingAngleBubble.value,
-            transformOrigin = TransformOrigin(packFloats(1f, 0f))
+            transformOrigin = TransformOrigin(1f, 0f)
           )
           .drawBehind {
             val bubble = Path().apply {
@@ -219,7 +219,7 @@ fun MessageItem(msg: Msg, shakingTime: Int, shakingLevel: Int) {
         Modifier
           .graphicsLayer(
             rotationZ = shakingAngleBubble.value * 0.6f,
-            transformOrigin = TransformOrigin(packFloats(1f, 0f))
+            transformOrigin = TransformOrigin(1f, 0f)
           )
           .size(40.dp)
           .clip(RoundedCornerShape(4.dp))
@@ -237,7 +237,7 @@ fun MessageItem(msg: Msg, shakingTime: Int, shakingLevel: Int) {
         Modifier
           .graphicsLayer(
             rotationZ = -shakingAngleBubble.value * 0.6f,
-            transformOrigin = TransformOrigin(packFloats(0f, 0f))
+            transformOrigin = TransformOrigin(0f, 0f)
           )
           .size(40.dp)
           .clip(RoundedCornerShape(4.dp))
@@ -247,7 +247,7 @@ fun MessageItem(msg: Msg, shakingTime: Int, shakingLevel: Int) {
         Modifier
           .graphicsLayer(
             rotationZ = -shakingAngleBubble.value,
-            transformOrigin = TransformOrigin(packFloats(0f, 0f))
+            transformOrigin = TransformOrigin(0f, 0f)
           )
           .drawBehind {
             val bubble = Path().apply {

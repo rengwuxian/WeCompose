@@ -190,7 +190,7 @@ fun WeTheme(theme: WeTheme.Theme = WeTheme.Theme.Light, content: @Composable () 
     chatPageBgAlpha = chatPageBgAlpha.value,
   )
 
-  Providers(LocalWeColors provides colors) {
+  CompositionLocalProvider(LocalWeColors provides colors) {
     MaterialTheme(
       shapes = shapes
     ) {

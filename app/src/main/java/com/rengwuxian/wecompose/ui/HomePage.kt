@@ -1,16 +1,12 @@
 package com.rengwuxian.wecompose.ui
 
 import androidx.annotation.DrawableRes
-import androidx.compose.animation.core.AnimationClockObservable
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.ProvidableCompositionLocal
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -85,13 +81,12 @@ fun WeBottomPreview() {
 }
 
 @Composable
-fun Home(LocalAnimationClock: ProvidableCompositionLocal<AnimationClockObservable>) {
+fun Home() {
   val viewModel: WeViewModel = viewModel()
   Box {
     Column(Modifier.fillMaxSize()) {
       val pagerState: PagerState = run {
-        val clock = LocalAnimationClock.current
-        remember(clock, viewModel.theme) { PagerState(clock, maxPage = 3) }
+        remember(viewModel.theme) { PagerState(maxPage = 3) }
       }
       Pager(pagerState, Modifier.weight(1f)) {
         when (page) {

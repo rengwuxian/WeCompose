@@ -27,7 +27,7 @@ fun WeTopBar(title: String, onBack: (() -> Unit)? = null) {
   ) {
     Row(
       Modifier
-        .preferredHeight(48.dp)
+        .height(48.dp)
     ) {
       if (onBack != null) {
         Icon(
