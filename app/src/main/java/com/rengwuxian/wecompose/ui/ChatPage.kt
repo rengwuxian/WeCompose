@@ -58,7 +58,7 @@ fun ChatPage(
           shakingTime += 1
         })
       }
-    ) {
+    ) { paddingValues ->
       val shakingOffset = remember { Animatable(0f) }
       LaunchedEffect(key1 = shakingTime, block = {
         if (shakingTime != 0) {
@@ -102,6 +102,7 @@ fun ChatPage(
         Modifier
           .fillMaxSize()
           .offset(shakingOffset.value.dp, shakingOffset.value.dp)
+          .padding(paddingValues)
       ) {
         items(chat.msgs.size) { index ->
           val msg = chat.msgs[index]
