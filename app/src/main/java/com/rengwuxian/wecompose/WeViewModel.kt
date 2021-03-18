@@ -46,6 +46,7 @@ class WeViewModel : ViewModel() {
   var openModule: Module? by mutableStateOf(null)
   var currentChat: Chat? by mutableStateOf(null)
     private set
+  var inHomePage by mutableStateOf(true)
 
   fun startChat(chat: Chat) {
     currentChat = chat
@@ -54,6 +55,7 @@ class WeViewModel : ViewModel() {
 
   fun endChat() {
     openModule = null
+    inHomePage = true
   }
 
   fun boom(chat: Chat) {

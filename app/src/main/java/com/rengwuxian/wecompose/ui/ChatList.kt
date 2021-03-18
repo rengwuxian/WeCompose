@@ -48,6 +48,7 @@ fun ChatListItem(
       .fillMaxWidth()
       .clickable(onClick = {
         viewModel.startChat(chat)
+        viewModel.inHomePage = false
       })
   ) {
     Image(

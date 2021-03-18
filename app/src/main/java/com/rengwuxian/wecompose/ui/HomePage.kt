@@ -105,7 +105,7 @@ fun Home() {
         }
       }
       HomeBottomBar(pagerState.currentPage) {
-        pagerState.currentPage = it
+       if(viewModel.inHomePage) pagerState.currentPage = it
       }
     }
     val openOffset by animateFloatAsState(
