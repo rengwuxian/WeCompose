@@ -2,8 +2,33 @@ plugins {
   id 'com.android.application'
   id 'kotlin-android'
 }
+def android_builder_version = "4.0.1"
 
+ext {
+  android_builder_main_version = Integer.parseInt(android_builder_version.split("\\.")[0])
+  android_builder_mid_version = Integer.parseInt(android_builder_version.split("\\.")[1])
+}
 android {
+  this.rootProject.buildscript.configurations.classpath
+          .resolvedConfiguration
+          .firstLevelModuleDependencies.
+          each {
+            def name = it.name
+            if (name.contains('com.android.tools.build:gradle')) {
+              def moduleVersion = it.moduleVersion
+              if (moduleVersion.contains("-")) {
+                def alphaversionArray = moduleVersion.split("-")[0]
+                def versionArray = alphaversionArray.toString().split("\\.")
+                ext.android_builder_main_version = Integer.parseInt(versionArray[0])
+                ext.android_builder_mid_version = Integer.parseInt(versionArray[1])
+              } else {
+                version = moduleVersion
+                android_builder_version = moduleVersion
+                ext.android_builder_main_version = Integer.parseInt(android_builder_version.split("\\.")[0])
+                ext.android_builder_mid_version = Integer.parseInt(android_builder_version.split("\\.")[1])
+              }
+            }
+          }
   compileSdkVersion 30
   buildToolsVersion "30.0.3"
 
@@ -32,7 +57,9 @@ android {
     useIR = true
   }
   buildFeatures {
-    compose true
+    if (android_builder_main_version >= 7 || (android_builder_main_version > 4 && android_builder_mid_version > 1)) {
+      compose true
+    }
   }
   composeOptions {
     kotlinCompilerVersion kotlin_version
@@ -41,23 +68,28 @@ android {
 }
 
 dependencies {
+  testImplementation 'junit:junit:4.13.2'
+  androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+  androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
   implementation 'androidx.core:core-ktx:1.5.0-beta02'
   implementation 'androidx.activity:activity-ktx:1.2.0'
-  implementation "androidx.activity:activity-compose:$compose_activity_version"
-  implementation "androidx.appcompat:appcompat:$compose_appcompat_version"
   implementation 'com.google.android.material:material:1.3.0'
   implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.0'
   implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0'
-  implementation "androidx.lifecycle:lifecycle-viewmodel-compose:$compose_lifecycle_version"
+  if (android_builder_main_version < 7) {
+    add("kotlinCompilerPluginClasspath", "androidx.compose.compiler:compiler:$compose_version")
+  }
+  implementation "androidx.activity:activity-compose:$compose_activity_version"
+  implementation "androidx.appcompat:appcompat:$compose_appcompat_version"
   implementation "androidx.compose.foundation:foundation:$compose_version"
   implementation "androidx.compose.foundation:foundation-layout:$compose_version"
   implementation "androidx.compose.material:material:$compose_version"
   implementation "androidx.compose.ui:ui:$compose_version"
   implementation "androidx.compose.ui:ui-tooling:$compose_version"
   implementation "androidx.compose.ui:ui-util:$compose_version"
+  implementation "androidx.lifecycle:lifecycle-viewmodel-compose:$compose_lifecycle_version"
+
   implementation 'dev.chrisbanes.accompanist:accompanist-insets:0.6.0'
-  testImplementation 'junit:junit:4.13.2'
-  androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-  androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
 }
