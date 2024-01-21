@@ -118,8 +118,10 @@ fun ChatPage(modifier: Modifier = Modifier) {
 @Composable
 fun MessageItem(msg: Msg, shakingTime: Int, shakingLevel: Int) {
   val shakingAngleBubble = remember { Animatable(0f) }
+  var currentShakingTime by remember { mutableStateOf(shakingTime) }
   LaunchedEffect(key1 = shakingTime, block = {
-    if (shakingTime != 0) {
+    if (shakingTime != 0 && shakingTime != currentShakingTime) {
+      currentShakingTime = shakingTime
       delay(shakingLevel.toLong() * 30)
       shakingAngleBubble.animateTo(
         0f,
