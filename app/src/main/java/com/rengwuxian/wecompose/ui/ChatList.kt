@@ -3,13 +3,19 @@ package com.rengwuxian.wecompose.ui
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Divider
-import androidx.compose.material.Text
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -20,46 +26,34 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.rengwuxian.wecompose.WeViewModel
 import com.rengwuxian.wecompose.data.Chat
 import com.rengwuxian.wecompose.ui.theme.WeComposeTheme
 
 @Composable
-fun ChatList(chats: List<Chat>) {
-  // ListView
-  // RecyclerView
-  // onDraw()
-  Column(
-    Modifier
-      .background(WeComposeTheme.colors.background)
-      .fillMaxSize()
-  ) {
-    WeTopBar(title = "扔信")
+fun ChatList(chats: List<Chat>, onChatClick: (Chat) -> Unit) {
+  Column(Modifier
+    .background(WeComposeTheme.colors.background)
+    .fillMaxSize()) {
+    WeTopBar("扔信")
     LazyColumn(Modifier.background(WeComposeTheme.colors.listItem)) {
       itemsIndexed(chats) { index, chat ->
-        ChatListItem(chat)
-        if (index < chats.lastIndex) {
-          Divider(
-            startIndent = 68.dp,
-            color = WeComposeTheme.colors.chatListDivider,
+        if (index > 0) {
+          HorizontalDivider(
+            Modifier.padding(start = 68.dp),
+            color = WeComposeTheme.colors.divider,
             thickness = 0.8f.dp
           )
         }
+        ChatListItem(chat, Modifier.clickable { onChatClick(chat) })
       }
     }
   }
 }
 
 @Composable
-private fun ChatListItem(chat: Chat) {
-  val viewModel: WeViewModel = viewModel()
+private fun ChatListItem(chat: Chat, modifier: Modifier = Modifier) {
   Row(
-    Modifier
-      .clickable {
-        viewModel.startChat(chat)
-      }
-      .fillMaxWidth()
+    modifier.fillMaxWidth()
   ) {
     Image(
       painterResource(chat.friend.avatar), chat.friend.name,
@@ -85,7 +79,7 @@ private fun ChatListItem(chat: Chat) {
   }
 }
 
-fun Modifier.unread(show: Boolean, color: Color): Modifier = this.drawWithContent {
+fun Modifier.unread(show: Boolean, color: Color) = drawWithContent {
   drawContent()
   if (show) {
     drawCircle(color, 5.dp.toPx(), Offset(size.width - 1.dp.toPx(), 1.dp.toPx()))

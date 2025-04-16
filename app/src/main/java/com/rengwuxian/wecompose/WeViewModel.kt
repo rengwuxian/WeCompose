@@ -1,18 +1,33 @@
 package com.rengwuxian.wecompose
 
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshotFlow
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.rengwuxian.wecompose.data.Chat
 import com.rengwuxian.wecompose.data.Msg
 import com.rengwuxian.wecompose.data.User
 import com.rengwuxian.wecompose.ui.theme.WeComposeTheme
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.stateIn
 
-class WeViewModel: ViewModel() {
+class WeViewModel : ViewModel() {
+  var theme by mutableStateOf(WeComposeTheme.Theme.Light)
+  val isLightTheme by derivedStateOf { theme == WeComposeTheme.Theme.Light }
+  val isLightThemeFlow = snapshotFlow { isLightTheme }
+    .stateIn(viewModelScope, SharingStarted.Lazily, true)
+  val contacts by mutableStateOf(
+    listOf(
+      User("gaolaoshi", "高老师", R.drawable.avatar_gaolaoshi),
+      User("diuwuxian", "丢物线", R.drawable.avatar_diuwuxian)
+    )
+  )
   var chats by mutableStateOf(
-    listOf( // List<Chat>
+    listOf(
       Chat(
         friend = User("gaolaoshi", "高老师", R.drawable.avatar_gaolaoshi),
         mutableStateListOf(
@@ -36,27 +51,13 @@ class WeViewModel: ViewModel() {
       ),
     )
   )
-  val contacts by mutableStateOf(
-    listOf(
-      User("gaolaoshi", "高老师", R.drawable.avatar_gaolaoshi),
-      User("diuwuxian", "丢物线", R.drawable.avatar_diuwuxian)
-    )
-  )
-  var theme by mutableStateOf(WeComposeTheme.Theme.Light)
-  var currentChat: Chat? by mutableStateOf(null)
-  var chatting by mutableStateOf(false)
 
-  fun startChat(chat: Chat) {
-    chatting = true
-    currentChat = chat
-  }
-
-  fun endChat(): Boolean {
-    if (chatting) {
-      chatting = false
-      return true
+  fun switchTheme() {
+    theme = when (theme) {
+      WeComposeTheme.Theme.Light -> WeComposeTheme.Theme.Dark;
+      WeComposeTheme.Theme.Dark -> WeComposeTheme.Theme.NewYear
+      WeComposeTheme.Theme.NewYear -> WeComposeTheme.Theme.Light
     }
-    return false
   }
 
   fun boom(chat: Chat) {

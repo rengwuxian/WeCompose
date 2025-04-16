@@ -4,11 +4,19 @@ import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Divider
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -18,9 +26,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.rengwuxian.wecompose.R
 import com.rengwuxian.wecompose.data.User
 import com.rengwuxian.wecompose.ui.theme.WeComposeTheme
-import com.rengwuxian.wecompose.R
 
 @Composable
 fun MeListTopBar() {
@@ -51,7 +59,7 @@ fun MeListTopBar() {
         color = WeComposeTheme.colors.textPrimary
       )
       Text(
-        "微信号：${User.Me.id}",
+        "扔信号：${User.Me.id}",
         Modifier.padding(top = 16.dp),
         fontSize = 14.sp,
         color = WeComposeTheme.colors.textSecondary
@@ -97,13 +105,9 @@ fun MeListItem(
   title: String,
   modifier: Modifier = Modifier,
   badge: @Composable (() -> Unit)? = null,
-  endBadge: @Composable (() -> Unit)? = null
+  endBadge: @Composable (() -> Unit)? = null,
 ) {
-  Row(
-    Modifier
-      .fillMaxWidth(),
-    verticalAlignment = Alignment.CenterVertically
-  ) {
+  Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
     Image(
       painterResource(icon), "title", Modifier
         .padding(12.dp, 8.dp, 8.dp, 8.dp)
@@ -130,16 +134,12 @@ fun MeListItem(
 
 @Composable
 fun MeList() {
-  Box(
-    Modifier
-      .background(WeComposeTheme.colors.background)
-      .fillMaxSize()
-  ) {
-    Column(
-      Modifier
-        .background(WeComposeTheme.colors.listItem)
-        .fillMaxWidth()
-    ) {
+  Box(Modifier
+    .background(WeComposeTheme.colors.background)
+    .fillMaxSize()) {
+    Column(Modifier
+      .background(WeComposeTheme.colors.listItem)
+      .fillMaxWidth()) {
       MeListTopBar()
       Spacer(
         Modifier
@@ -155,11 +155,23 @@ fun MeList() {
           .height(8.dp)
       )
       MeListItem(R.drawable.ic_collections, "收藏")
-      Divider(startIndent = 56.dp, color = WeComposeTheme.colors.chatListDivider, thickness = 0.8f.dp)
+      HorizontalDivider(
+        Modifier.padding(start = 56.dp),
+        color = WeComposeTheme.colors.divider,
+        thickness = 0.8f.dp
+      )
       MeListItem(R.drawable.ic_photos, "朋友圈")
-      Divider(startIndent = 56.dp, color = WeComposeTheme.colors.chatListDivider, thickness = 0.8f.dp)
+      HorizontalDivider(
+        Modifier.padding(start = 56.dp),
+        color = WeComposeTheme.colors.divider,
+        thickness = 0.8f.dp
+      )
       MeListItem(R.drawable.ic_cards, "卡包")
-      Divider(startIndent = 56.dp, color = WeComposeTheme.colors.chatListDivider, thickness = 0.8f.dp)
+      HorizontalDivider(
+        Modifier.padding(start = 56.dp),
+        color = WeComposeTheme.colors.divider,
+        thickness = 0.8f.dp
+      )
       MeListItem(R.drawable.ic_stickers, "表情")
       Spacer(
         Modifier
